@@ -131,7 +131,7 @@ function btnCheck() {
                $('#get').removeClass('on');
 
           }else {
-               $('#get').html(`重新发送（${time}）`)
+               $('#get').html("重新发送"+"("+time + ")");
                time -- ;
           }
      },1000);
