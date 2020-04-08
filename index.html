@@ -1,56 +1,152 @@
-<!DOCTYPE html>
-<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-    <link rel="stylesheet" href="./css/index.css"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,height=device-height,initial-scale=1">
+    <title>无标题 - 记事本</title>
+    <link rel="stylesheet" href="index.css">
+    <link rel="icon" href="images/notepad-icon-32.png" sizes="32x32" type="image/png">
 </head>
+
+
 <body>
-    <div>
-        <img style="width:100px;position: absolute;top:30px;left:30px;" src="https://passport.baidu.com/static/passpc-account/img/baidu.png" alt="">
-        <div class="reg-container">
-            <h1>欢迎注册</h1>
-            <div class="reg-content">
-                <div class="form-container">
-                    <div class="rows">
-                        <label for="username">用户名</label>
-                        <input id="username" type="text" maxlength="14" placeholder="请输入用户名"/>
-                        <p id="username-invalidate"></p>
-                        <br>
-
-                    </div>
-
-                    <div class="rows">
-                        <label for="telephone">手机号</label>
-                        <input id="telephone" type="number" minlength="11" maxlength="11" placeholder="请输入手机号"/>
-                        <p id="tell-invalidate"></p>
-                        <br>
-    
-                    </div>
-
-                    <div class="rows">
-                        <label for="password">密码</label>
-                        <input id="pwd" type="password"  placeholder="请输入密码"/>
-                        <br>
-                        <p id="pwd-invalidate"></p>
-                    </div>
-                    <div class="rows" style="text-align: left;">
-                        <label for="check" pattern="[12]|1">验证码</label>
-                        <input id="iden" style="width:100px;margin-right:10px;" id="check" type="text"  placeholder="请输入验证码"/>
-                        <button id="get">获取验证码</button>
-                        <p id="iden-invalidate"></p>
-                    </div>
-                    <div style="width:100%;text-align: center;">
-                        <button id="btn" style="width:40%;height:40px;margin-top:30px">立即注册</button>
-                    </div>
-                </div>
-
+    <div class="notepad-app"></div>
+    <script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script src="http://cdn.bootcss.com/jqueryui/1.12.1/jquery-ui.min.js"></script>
+    <script src="index.js"></script>
+    <div class="notepad-menubar">
+        <ul class="menu-title">
+            <li class="title" data-id="0">文件(F)</li>
+            <li class="title" data-id="1">编辑(E)</li>
+            <li class="title" data-id="2">格式(O)</li>
+            <li class="title" data-id="3">查看(V)</li>
+            <li class="title" data-id="4">帮助(H)</li>
+        </ul>
+        <ul class="menus" style="width: 202px; left: 0px; display: none;">
+            <li class="menu-item" data-x="0" data-y="0">新建(N)<span class="shortcut">Ctrl+N</span></li>
+            <li class="menu-item" data-x="0" data-y="1">打开(O)...<span class="shortcut">Ctrl+O</span></li>
+            <li class="menu-item" data-x="0" data-y="2">保存(S)<span class="shortcut">Ctrl+S</span></li>
+            <li class="menu-item" data-x="0" data-y="3">另存为(A)...</li>
+            <li class="menu-hr"></li>
+            <li class="menu-item" data-x="0" data-y="5">页面设置(U)...</li>
+            <li class="menu-item" data-x="0" data-y="6">打印(P)...<span class="shortcut">Ctrl+P</span></li>
+            <li class="menu-hr"></li>
+            <li class="menu-item" data-x="0" data-y="8">退出(X)</li>
+        </ul>
+        <ul class="menus" style="width: 218px; left: 52px; display: none;">
+            <li class="menu-item disabled" data-x="1" data-y="0">撤销(U)<span class="shortcut">Ctrl+Z</span></li>
+            <li class="menu-hr"></li>
+            <li class="menu-item" data-x="1" data-y="2">剪切(T)<span class="shortcut">Ctrl+X</span></li>
+            <li class="menu-item disabled" data-x="1" data-y="3">复制(C)<span class="shortcut">Ctrl+C</span></li>
+            <li class="menu-item disabled" data-x="1" data-y="4">粘贴(P)<span class="shortcut">Ctrl+V</span></li>
+            <li class="menu-item disabled" data-x="1" data-y="5">删除(L)<span class="shortcut">Del</span></li>
+            <li class="menu-hr"></li>
+            <li class="menu-item" data-x="1" data-y="7">使用 Bing 搜索...<span class="shortcut">Ctrl+E</span></li>
+            <li class="menu-item" data-x="1" data-y="8">查找(F)...<span class="shortcut">Ctrl+F</span></li>
+            <li class="menu-item disabled" data-x="1" data-y="9">查找下一个(N)<span class="shortcut">F3</span></li>
+            <li class="menu-item" data-x="1" data-y="10">替换(R)...<span class="shortcut">Ctrl+H</span></li>
+            <li class="menu-item disabled" data-x="1" data-y="11">转到(G)...<span class="shortcut">Ctrl+G</span></li>
+            <li class="menu-hr"></li>
+            <li class="menu-item" data-x="1" data-y="13">全选(A)<span class="shortcut">Ctrl+A</span></li>
+            <li class="menu-item" data-x="1" data-y="14">时间/日期(D)<span class="shortcut">F5</span></li>
+        </ul>
+        <ul class="menus" style="width: 156px; left: 106px; display: none;">
+            <li class="menu-item" data-x="2" data-y="0"><span class="checked">✓</span>自动换行(W)</li>
+            <li class="menu-item" data-x="2" data-y="1">字体(F)...</li>
+        </ul>
+        <ul class="menus" style="width: 138px; left: 162px; display: none;">
+            <li class="menu-item disabled" data-x="3" data-y="0">状态栏(S)</li>
+        </ul>
+        <ul class="menus" style="width: 166px; left: 216px; display: none;">
+            <li class="menu-item" data-x="4" data-y="0">查看帮助(H)</li>
+            <li class="menu-item" data-x="4" data-y="1">关于记事本(A)</li>
+        </ul>
+    </div>
+    <div class="notepad-editor" style="bottom: 0px;"><textarea spellcheck="false" auto-size="none" wrap="soft" style="overflow-x: hidden; font-family: Arial; font-size: 16pt;"></textarea></div>
+    <div class="notepad-statusbar" style="display: none;">
+        <div class="left-panel"></div>
+        <div class="right-panel">
+            <p class="row-col">第&nbsp;1&nbsp;行，第&nbsp;1&nbsp;列</p>
+        </div>
+    </div>
+    <div id="free_vpn_container">
+        <div class="free-vpn_wrap">
+            <div class="free-vpn_rate-popup">
+                <div class="free-vpn_close-btn"> <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 512 512" style="enable-background:new 0 0 512 512;" xml:space="preserve">
+                        <g>
+                            <g>
+                                <path fill="#afafaf"
+                                    d="M505.943,6.058c-8.077-8.077-21.172-8.077-29.249,0L6.058,476.693c-8.077,8.077-8.077,21.172,0,29.249                                        C10.096,509.982,15.39,512,20.683,512c5.293,0,10.586-2.019,14.625-6.059L505.943,35.306                                        C514.019,27.23,514.019,14.135,505.943,6.058z">
+                                </path>
+                            </g>
+                        </g>
+                        <g>
+                            <g>
+                                <path fill="#afafaf"
+                                    d="M505.942,476.694L35.306,6.059c-8.076-8.077-21.172-8.077-29.248,0c-8.077,8.076-8.077,21.171,0,29.248l470.636,470.636                                        c4.038,4.039,9.332,6.058,14.625,6.058c5.293,0,10.587-2.019,14.624-6.057C514.018,497.866,514.018,484.771,505.942,476.694z">
+                                </path>
+                            </g>
+                        </g>
+                    </svg> </div>
+                <div class="free-vpn_logo"></div>
+                <div class="free-vpn_title">Free VPN</div>
+                <div class="free-vpn_text"> Enjoyed our app? Give us 5 stars! </div>
+                <div class="free-vpn_stars"> <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="Capa_1" x="0px" y="0px" width="512px" height="512px" viewBox="0 0 46.354 46.354" style="enable-background:new 0 0 46.354 46.354;" xml:space="preserve">
+                        <g>
+                            <g>
+                                <path
+                                    d="M21.57,2.049c0.303-0.612,0.927-1,1.609-1c0.682,0,1.307,0.388,1.609,1l5.771,11.695c0.261,0.529,0.767,0.896,1.352,0.981   L44.817,16.6c0.677,0.098,1.237,0.572,1.448,1.221c0.211,0.649,0.035,1.363-0.454,1.839l-9.338,9.104   c-0.423,0.412-0.616,1.006-0.517,1.588l2.204,12.855c0.114,0.674-0.161,1.354-0.715,1.756c-0.553,0.4-1.284,0.453-1.89,0.137   l-11.544-6.07c-0.522-0.275-1.147-0.275-1.67,0l-11.544,6.069c-0.604,0.317-1.337,0.265-1.89-0.136   c-0.553-0.401-0.829-1.082-0.714-1.756l2.204-12.855c0.1-0.582-0.094-1.176-0.517-1.588L0.542,19.66   c-0.489-0.477-0.665-1.19-0.454-1.839c0.211-0.649,0.772-1.123,1.449-1.221l12.908-1.875c0.584-0.085,1.09-0.452,1.351-0.982   L21.57,2.049z"
+                                    data-original="#000000" class="active-path" data-old_color="#000000" fill="#FFD325">
+                                </path>
+                            </g>
+                        </g>
+                    </svg> <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="Capa_1" x="0px" y="0px" width="512px" height="512px" viewBox="0 0 46.354 46.354" style="enable-background:new 0 0 46.354 46.354;"
+                        xml:space="preserve">
+                        <g>
+                            <g>
+                                <path
+                                    d="M21.57,2.049c0.303-0.612,0.927-1,1.609-1c0.682,0,1.307,0.388,1.609,1l5.771,11.695c0.261,0.529,0.767,0.896,1.352,0.981   L44.817,16.6c0.677,0.098,1.237,0.572,1.448,1.221c0.211,0.649,0.035,1.363-0.454,1.839l-9.338,9.104   c-0.423,0.412-0.616,1.006-0.517,1.588l2.204,12.855c0.114,0.674-0.161,1.354-0.715,1.756c-0.553,0.4-1.284,0.453-1.89,0.137   l-11.544-6.07c-0.522-0.275-1.147-0.275-1.67,0l-11.544,6.069c-0.604,0.317-1.337,0.265-1.89-0.136   c-0.553-0.401-0.829-1.082-0.714-1.756l2.204-12.855c0.1-0.582-0.094-1.176-0.517-1.588L0.542,19.66   c-0.489-0.477-0.665-1.19-0.454-1.839c0.211-0.649,0.772-1.123,1.449-1.221l12.908-1.875c0.584-0.085,1.09-0.452,1.351-0.982   L21.57,2.049z"
+                                    data-original="#000000" class="active-path" data-old_color="#000000" fill="#FFD325">
+                                </path>
+                            </g>
+                        </g>
+                    </svg> <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="Capa_1" x="0px" y="0px" width="512px" height="512px" viewBox="0 0 46.354 46.354" style="enable-background:new 0 0 46.354 46.354;"
+                        xml:space="preserve">
+                        <g>
+                            <g>
+                                <path
+                                    d="M21.57,2.049c0.303-0.612,0.927-1,1.609-1c0.682,0,1.307,0.388,1.609,1l5.771,11.695c0.261,0.529,0.767,0.896,1.352,0.981   L44.817,16.6c0.677,0.098,1.237,0.572,1.448,1.221c0.211,0.649,0.035,1.363-0.454,1.839l-9.338,9.104   c-0.423,0.412-0.616,1.006-0.517,1.588l2.204,12.855c0.114,0.674-0.161,1.354-0.715,1.756c-0.553,0.4-1.284,0.453-1.89,0.137   l-11.544-6.07c-0.522-0.275-1.147-0.275-1.67,0l-11.544,6.069c-0.604,0.317-1.337,0.265-1.89-0.136   c-0.553-0.401-0.829-1.082-0.714-1.756l2.204-12.855c0.1-0.582-0.094-1.176-0.517-1.588L0.542,19.66   c-0.489-0.477-0.665-1.19-0.454-1.839c0.211-0.649,0.772-1.123,1.449-1.221l12.908-1.875c0.584-0.085,1.09-0.452,1.351-0.982   L21.57,2.049z"
+                                    data-original="#000000" class="active-path" data-old_color="#000000" fill="#FFD325">
+                                </path>
+                            </g>
+                        </g>
+                    </svg> <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="Capa_1" x="0px" y="0px" width="512px" height="512px" viewBox="0 0 46.354 46.354" style="enable-background:new 0 0 46.354 46.354;"
+                        xml:space="preserve">
+                        <g>
+                            <g>
+                                <path
+                                    d="M21.57,2.049c0.303-0.612,0.927-1,1.609-1c0.682,0,1.307,0.388,1.609,1l5.771,11.695c0.261,0.529,0.767,0.896,1.352,0.981   L44.817,16.6c0.677,0.098,1.237,0.572,1.448,1.221c0.211,0.649,0.035,1.363-0.454,1.839l-9.338,9.104   c-0.423,0.412-0.616,1.006-0.517,1.588l2.204,12.855c0.114,0.674-0.161,1.354-0.715,1.756c-0.553,0.4-1.284,0.453-1.89,0.137   l-11.544-6.07c-0.522-0.275-1.147-0.275-1.67,0l-11.544,6.069c-0.604,0.317-1.337,0.265-1.89-0.136   c-0.553-0.401-0.829-1.082-0.714-1.756l2.204-12.855c0.1-0.582-0.094-1.176-0.517-1.588L0.542,19.66   c-0.489-0.477-0.665-1.19-0.454-1.839c0.211-0.649,0.772-1.123,1.449-1.221l12.908-1.875c0.584-0.085,1.09-0.452,1.351-0.982   L21.57,2.049z"
+                                    data-original="#000000" class="active-path" data-old_color="#000000" fill="#FFD325">
+                                </path>
+                            </g>
+                        </g>
+                    </svg> <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="Capa_1" x="0px" y="0px" width="512px" height="512px" viewBox="0 0 46.354 46.354" style="enable-background:new 0 0 46.354 46.354;"
+                        xml:space="preserve">
+                        <g>
+                            <g>
+                                <path
+                                    d="M21.57,2.049c0.303-0.612,0.927-1,1.609-1c0.682,0,1.307,0.388,1.609,1l5.771,11.695c0.261,0.529,0.767,0.896,1.352,0.981   L44.817,16.6c0.677,0.098,1.237,0.572,1.448,1.221c0.211,0.649,0.035,1.363-0.454,1.839l-9.338,9.104   c-0.423,0.412-0.616,1.006-0.517,1.588l2.204,12.855c0.114,0.674-0.161,1.354-0.715,1.756c-0.553,0.4-1.284,0.453-1.89,0.137   l-11.544-6.07c-0.522-0.275-1.147-0.275-1.67,0l-11.544,6.069c-0.604,0.317-1.337,0.265-1.89-0.136   c-0.553-0.401-0.829-1.082-0.714-1.756l2.204-12.855c0.1-0.582-0.094-1.176-0.517-1.588L0.542,19.66   c-0.489-0.477-0.665-1.19-0.454-1.839c0.211-0.649,0.772-1.123,1.449-1.221l12.908-1.875c0.584-0.085,1.09-0.452,1.351-0.982   L21.57,2.049z"
+                                    data-original="#000000" class="active-path" data-old_color="#000000" fill="#FFD325">
+                                </path>
+                            </g>
+                        </g>
+                    </svg> </div> <a class="free-vpn_rate-btn" target="_blank" href="https://chrome.google.com/webstore/detail/free-vpn-the-fastest-vpn/nkomfibbgccdjcahcpleidblgknecfhh/reviews">Rate
+                    VPN</a>
             </div>
         </div>
     </div>
+    <div class="xl-chrome-ext-bar" id="xl_chrome_ext_{4DB361DE-01F7-4376-B494-639E489D19ED}" style="display: none;">
+        <div class="xl-chrome-ext-bar__logo"></div>
+        <a id="xl_chrome_ext_download" href="javascript:;" class="xl-chrome-ext-bar__option">下载视频</a>
+        <a id="xl_chrome_ext_close" href="javascript:;" class="xl-chrome-ext-bar__close"></a>
+    </div>
 </body>
-<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
-<script type="text/javascript" src="index.js"></script>
-</html>

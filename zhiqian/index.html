@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="./css/index.css"/>
+</head>
+<body>
+    <div>
+        <img style="width:100px;position: absolute;top:30px;left:30px;" src="https://passport.baidu.com/static/passpc-account/img/baidu.png" alt="">
+        <div class="reg-container">
+            <h1>欢迎注册</h1>
+            <div class="reg-content">
+                <div class="form-container">
+                    <div class="rows">
+                        <label for="username">用户名</label>
+                        <input id="username" type="text" maxlength="14" placeholder="请输入用户名"/>
+                        <p id="username-invalidate"></p>
+                        <br>
+
+                    </div>
+
+                    <div class="rows">
+                        <label for="telephone">手机号</label>
+                        <input id="telephone" type="number" minlength="11" maxlength="11" placeholder="请输入手机号"/>
+                        <p id="tell-invalidate"></p>
+                        <br>
+    
+                    </div>
+
+                    <div class="rows">
+                        <label for="password">密码</label>
+                        <input id="pwd" type="password"  placeholder="请输入密码"/>
+                        <br>
+                        <p id="pwd-invalidate"></p>
+                    </div>
+                    <div class="rows" style="text-align: left;">
+                        <label for="check" pattern="[12]|1">验证码</label>
+                        <input id="iden" style="width:100px;margin-right:10px;" id="check" type="text"  placeholder="请输入验证码"/>
+                        <button id="get">获取验证码</button>
+                        <p id="iden-invalidate"></p>
+                    </div>
+                    <div style="width:100%;text-align: center;">
+                        <button id="btn" style="width:40%;height:40px;margin-top:30px">立即注册</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</body>
+<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+<script type="text/javascript" src="index.js"></script>
+</html>
